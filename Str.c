@@ -1,8 +1,52 @@
+// Cooper Nissenbaum & Maggie Zhao
+// Systems-Level Programming Pd10
+
 #include <stdio.h>
 #include <string.h>
+#include "StrHead.h"
+// ------------------------------- mystrlen -------------------------------
+//computes the length of the string s
+int mystrlen(char * s)
+{
+  int i = 0;
+  while (*s) {
+    i++;
+    s++;
+  }
+  return i;
+}
 
+// ------------------------------- mystrcpy -------------------------------
+//copies the string src to dst (including the terminating `\0' character.)
+//return dst
+char * mystrcpy(char *dest, char *source) {
+
+  char * destStart = dest;
+  while (*source)
+    * dest ++ = *source++;
+  *dest = '\0';
+  return destStart;
+}
+
+// ------------------------------- mystrncat -------------------------------
+//appends not more than n characters from the null-terminated string src to the end of the null-terminated string dest, then adds a terminating `\0'.  The string s1 must have sufficient space to hold the result.
+//returns the pointer dest
+char * mystrncat( char *dest, char *source, int n ) {
+   char * destStart = dest;
+   while (*dest)
+    dest++;
+
+  for (int i = 0; i < n && *source; i++)
+    * dest ++ = *source++;
+
+  *dest = '\0';
+  return destStart;
+ }
+
+// ------------------------------- mystrcmp -------------------------------
+//lexicographically compare the null-terminated strings s0 and s1
+//returns an integer >, =, or < 0, according as the string s0 is >, =, or < the string s1
 int mystrcmp(char * s0, char * s1) {
-
 	while (*s0 == *s1) {
 		s0++;
 		s1++;
@@ -11,8 +55,10 @@ int mystrcmp(char * s0, char * s1) {
 	return *s0 - *s1;
 }
 
+// ------------------------------- mystrchr -------------------------------
+//locates the first occurrence of c (converted to a char) in the string pointed to by s. The terminating null character is considered to be part of the string; therefore if c is `\0', the functions locate the terminating `\0
+//returns a pointer to the located character, or NULL if the character does not appear in the string
 char * mystrchr(char * s, char c) {
-
 	int i = 0;
 	int length = strlen(s);
 
@@ -20,64 +66,6 @@ char * mystrchr(char * s, char c) {
 		if (*s == c) return s;
 		s++;
 	}
-
-	return 0;
-}
-
-
-int main()
-{
-	
-// ------------------------------- strcmp -------------------------------
-
-	char word0[] = "eggplant";
-	char word1[] = "egg";
-	char word2[] = "Kard";
-	char word3[] = "";
-	char word4[] = "surprise";
-
-	printf("\nWord 0: %s\n", word0);
-	printf("Word 1: %s\n", word1);
-	printf("Word 2: %s\n", word2);
-	printf("Word 3: %s\n", word3);
-	printf("Word 4: %s\n", word4);
-
-	printf("\nMY 0 & 1: %d\n", mystrcmp(word0,word1));
-	printf("CF 0 & 1: %d\n",   strcmp(word0,word1));	
-	printf("MY 0 & 2: %d\n", mystrcmp(word0,word2));
-	printf("CF 0 & 2: %d\n",   strcmp(word0,word2));
-	printf("MY 0 & 3: %d\n", mystrcmp(word0,word3));
-	printf("CF 0 & 3: %d\n",   strcmp(word0,word3));
-	printf("MY 0 & 4: %d\n", mystrcmp(word0,word4));
-	printf("CF 0 & 4: %d\n",   strcmp(word0,word4));
-
-// ------------------------------- strchr -------------------------------
-
-	char letter = 'n';
-
-	printf("\nWord: %s\n", word0);
-	printf("Char to find: %c\n", letter);
-
-	printf("MY strchr: %p\n", mystrchr(word0, letter));
-	printf("CF strchr: %p\n",   strchr(word0, letter));
-
-	letter = 'g';
-
-	printf("\nWord: %s\n", word2);
-	printf("Char to find: %c\n", letter);
-
-	printf("MY strchr: %p\n", mystrchr(word2, letter));
-	printf("CF strchr: %p\n",   strchr(word2, letter));
-
-	letter = 's';
-
-	printf("\nWord: %s\n", word4);
-	printf("Char to find: %c\n", letter);
-
-	printf("MY strchr: %p\n", mystrchr(word4, letter));
-	printf("CF strchr: %p\n",   strchr(word4, letter));
-
-	printf("\n");
 
 	return 0;
 }

@@ -6,3 +6,6 @@ Str.o: Str.c StrHead.h
 
 StrTester.o: StrTester.c StrHead.h
 	gcc -c StrTester.c
+
+run:
+	./a.out
